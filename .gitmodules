@@ -1,3 +1,0 @@
-[submodule "sm4/sm4_extern"]
-	path = sm4/sm4_extern
-	url = https://github.com/phanen/sm4.git
