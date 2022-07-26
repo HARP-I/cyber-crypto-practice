@@ -20,9 +20,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define _mm_rotl_epi32(X, i)                                                  \
-  _mm_xor_si128 (_mm_slli_epi32 ((X), (i)), _mm_srli_epi32 ((X), 32 - (i)))
-
 // compress full blocks (from state)
 static inline void
 sm3_cf (uint32_t state[SM3_STATE_SZ_IN_WD], const uint8_t *input,

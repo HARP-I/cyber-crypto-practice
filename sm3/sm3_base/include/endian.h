@@ -1,6 +1,6 @@
 /**
  * @file endian.h
- * @brief
+ * @brief Macro to handle end order
  * @date 2022-07-25
  *
  * @copyright Copyright (c) 2022. phanen

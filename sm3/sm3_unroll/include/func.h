@@ -1,6 +1,6 @@
 /**
  * @file func.h
- * @brief macro and const
+ * @brief Macro to represent Bool Function and Const
  * @date 2022-07-25
  *
  * @copyright Copyright (c) 2022. phanen

@@ -1,12 +1,13 @@
 /**
  * @file func.h
- * @brief macro and const
+ * @brief Macro to represent Bool Function and Const
  * @date 2022-07-25
  *
  * @copyright Copyright (c) 2022. phanen
  *
  */
 
+#
 #include <stdint.h>
 
 // Rotate left
@@ -21,27 +22,6 @@
 #define FF16(x, y, z) (((x) & (y)) | ((x) & (z)) | ((y) & (z)))
 #define GG00(x, y, z) ((x) ^ (y) ^ (z))
 #define GG16(x, y, z) ((((y) ^ (z)) & (x)) ^ (z))
-
-#define R(A, B, C, D, E, F, G, H, xx)                                         \
-  SS1 = ROL32 ((ROL32 (A, 12) + E + K[j]), 7);                                \
-  SS2 = SS1 ^ ROL32 (A, 12);                                                  \
-  TT1 = FF##xx (A, B, C) + D + SS2 + (W[j] ^ W[j + 4]);                       \
-  TT2 = GG##xx (E, F, G) + H + SS1 + W[j];                                    \
-  B = ROL32 (B, 9);                                                           \
-  H = TT1;                                                                    \
-  F = ROL32 (F, 19);                                                          \
-  D = P0 (TT2);                                                               \
-  j++
-
-#define R8(A, B, C, D, E, F, G, H, xx)                                        \
-  R (A, B, C, D, E, F, G, H, xx);                                             \
-  R (H, A, B, C, D, E, F, G, xx);                                             \
-  R (G, H, A, B, C, D, E, F, xx);                                             \
-  R (F, G, H, A, B, C, D, E, xx);                                             \
-  R (E, F, G, H, A, B, C, D, xx);                                             \
-  R (D, E, F, G, H, A, B, C, xx);                                             \
-  R (C, D, E, F, G, H, A, B, xx);                                             \
-  R (B, C, D, E, F, G, H, A, xx)
 
 #define T00 0x79cc4519U
 #define T16 0x7a879d8aU

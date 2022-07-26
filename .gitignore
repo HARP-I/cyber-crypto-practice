@@ -1,7 +1,29 @@
-
-.vscode/
-build/
-*.exe
+# file
+*.h~
+*.cpp~
+*.c~
 *.o
-*.out
-tt
+*.exe
+.metadata
+.cproject
+.project
+.settings
+*.db
+*.dump
+
+# dir 
+tt/
+.vscode/
+build*/
+
+# CMake
+CMakeCache.txt
+CMakeFiles
+CMakeScripts
+Testing
+Makefile
+cmake_install.cmake
+install_manifest.txt
+compile_commands.json
+CTestTestfile.cmake
+

@@ -1,6 +1,6 @@
 /**
  * @file func.h
- * @brief macro and const
+ * @brief Macro to represent Bool Function and Const
  * @date 2022-07-25
  *
  * @copyright Copyright (c) 2022. phanen
@@ -8,6 +8,10 @@
  */
 
 #include <stdint.h>
+
+// SIMD ROTL, for each 32 in 128
+#define _mm_rotl_epi32(X, i)                                                  \
+  _mm_xor_si128 (_mm_slli_epi32 ((X), (i)), _mm_srli_epi32 ((X), 32 - (i)))
 
 // Rotate left
 #define ROTL(x, n) (((x) << (n)) | ((x) >> (32 - (n))))
