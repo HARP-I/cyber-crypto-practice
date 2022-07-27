@@ -17,22 +17,22 @@
 // #define Progress_Log
 
 void dump (const uint8_t *arr, size_t len, const char *info, size_t col);
-void test_short_msg ();
-void test_large_file (char *filename);
+void test_short_msg (int rounds);
+void test_large_file (char *filename, int rounds);
 
 int
 main (int argc, char **argv)
 {
-  if (argc == 1)
-    test_short_msg ();
-  else if (argc == 2)
-    test_large_file (argv[1]);
+  if (argc == 2)
+    test_short_msg (atoi (argv[1]));
+  else if (argc == 3)
+    test_large_file (argv[2], atoi (argv[1]));
   else
     printf ("Invalid Args!!");
 }
 
 void
-test_large_file (char *filename)
+test_large_file (char *filename, int rounds)
 {
   const size_t dgst_len = SM3_DIGST_SZ_IN_BT;
   uint8_t dgst[dgst_len];
@@ -55,7 +55,7 @@ test_large_file (char *filename)
 #endif
 
   sm3_ctx_t ctx;
-  sm3_init (&ctx);
+  sm3_init (&ctx, rounds);
   int cnt = 0;
   size_t cur_len = 0;
 #ifdef Progress_Log
@@ -84,7 +84,7 @@ test_large_file (char *filename)
 }
 
 void
-test_short_msg ()
+test_short_msg (int rounds)
 {
   const size_t dgst_len = SM3_DIGST_SZ_IN_BT;
   uint8_t dgst[dgst_len];
@@ -93,7 +93,7 @@ test_short_msg ()
   {
     const char *msg = "abc";
     dump (msg, strlen (msg), "msg", 8);
-    sm3_digest (msg, strlen (msg), dgst);
+    sm3_digest (msg, strlen (msg), dgst, rounds);
     dump (dgst, dgst_len, "dgst", 8);
   }
 
@@ -102,7 +102,7 @@ test_short_msg ()
     const char *msg
         = "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd";
     dump (msg, strlen (msg), "msg", 8);
-    sm3_digest (msg, strlen (msg), dgst);
+    sm3_digest (msg, strlen (msg), dgst, rounds);
     dump (dgst, dgst_len, "dgst", 8);
   }
 }

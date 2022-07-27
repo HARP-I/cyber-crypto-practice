@@ -9,8 +9,7 @@ if(NOT CMAKE_BUILD_TYPE)
         FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
-CMAKE_LIBRARY_OUTPUT_DIRECTORY
-
+# CMAKE_LIBRARY_OUTPUT_DIRECTORY
 
 # Write built executables and libraries to bin/ and lib/
 if(NOT CMAKE_RUNTIME_OUTPUT_DIRECTORY)

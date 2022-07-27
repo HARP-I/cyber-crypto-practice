@@ -14,3 +14,8 @@ add_executable(sm3_test_simd src/main.c)
 target_link_libraries(sm3_test_simd
     PRIVATE sm3::simd
 )
+
+add_executable(sm3_test_reduced src/test_reduced.c)
+target_link_libraries(sm3_test_reduced
+    PRIVATE sm3::reduced
+)

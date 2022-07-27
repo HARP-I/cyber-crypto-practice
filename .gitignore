@@ -12,6 +12,8 @@
 *.dump
 
 *.pyc
+newfile.txt
+
 
 # dir 
 tt/
