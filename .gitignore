@@ -11,10 +11,14 @@
 *.db
 *.dump
 
+*.pyc
+
 # dir 
 tt/
 .vscode/
 build*/
+venv/
+.idea/
 
 # CMake
 CMakeCache.txt
@@ -26,4 +30,3 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
-

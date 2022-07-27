@@ -19,13 +19,15 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
     Proofs, explanations and pseudo-code can be found here (in french) : https://devnathan.github.io/source/TIPE.pdf
 """
+
+
+
+
 import random
 import sys
 import string
 import numpy as np
 import hashlib
-
-
 class Rho_pollard:
     """
         Arguments
@@ -45,7 +47,8 @@ class Rho_pollard:
         Generate a random messages with a maximum length of max_length
         '''
         word_len = random.randint(1, self.len_max_word)
-        message = ''.join([random.choice(string.ascii_letters + string.digits) for y in range(word_len)])
+        message = ''.join(
+            [random.choice(string.ascii_letters + string.digits) for y in range(word_len)])
         return message
 
     def H(self, hash):
@@ -132,6 +135,7 @@ class Rho_pollard:
         clear1 = self.R(old_hi0)
         clear2 = self.R(old_h_pprime_i0)
         print("\n\n\n################## COLLISION FOUND ##################\n\n" "Hash(", clear1, ") = ",
-              str(self.hash_func(clear1)), "\nHash(", clear2, ") = ", str(self.hash_func(clear2)),
+              str(self.hash_func(clear1)), "\nHash(", clear2, ") = ", str(
+                  self.hash_func(clear2)),
               "\n\n####################################################")
         return (clear1, clear2, i0 + j0)
