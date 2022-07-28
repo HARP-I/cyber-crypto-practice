@@ -1,4 +1,15 @@
 
+## Iteraition Attack
+Reduced sm3 by cut(Truncate few bits)
+> Fail to search collisions in full sm3.
+> Not attempted to do search collisions in round-reduced sm3.
+- Birthday Attack(online)
+![](https://s2.loli.net/2022/07/27/leY2QFwWzViADbT.png)
+- Bithday Attack(Iteration)
+![](https://s2.loli.net/2022/07/27/62tQu7cKosENZiL.png)
+```
+
+
 ## Principle of Birthday Attack
 - [Birthday problem](https://en.wikipedia.org/wiki/Birthday_problem)
 - [Pigeonhole principle](https://en.wikipedia.org/wiki/Pigeonhole_principle)
@@ -79,7 +90,7 @@ See [Rho method](../rho_attack/README.md]) to learn about a low-memory attack.
 
 
 # Reference
-- [Bithday Attack](https://en.wikipedia.org/wiki/Birthday_attack)
+<!-- - [Bithday Attack](https://en.wikipedia.org/wiki/Birthday_attack) -->
 - [Birthday Problem](https://en.wikipedia.org/wiki/Birthday_problem)
 - [Pigeonhole Principle](https://en.wikipedia.org/wiki/Pigeonhole_principle)
 - [Serious Cryptography](https://zh.book4you.org/book/3399523/14ceb5)

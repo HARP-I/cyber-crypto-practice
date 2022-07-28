@@ -4,29 +4,21 @@
 Collision attacks against SM3. [(About Hash Collison)](https://en.wikipedia.org/wiki/Hash_collision)
 To get more detailed results, standard sm3 and various types of **Round-Reduced SM3** are applied. 
 
-Tow kinds policies Included:
+Tow kinds policies Included(for detailed result):
 - [Naïve birthday attack](./birthday_attack/README.md)
   - Classical method
   - Three new methods proposed
 - [The Rho method](./rho_attack/README.md)
 
 
-Attack Code:
+<!-- Attack Code:
 - `.py` Third-party library based implementation
-- `.c` No dependency based implementation
-
-# Result
-- Search by birthday attack (logInfo: each line is a pair of digest and its preimage)
-  ![Search by birthday attack](https://s2.loli.net/2022/07/27/gtL6MBvI38bYwhA.png)
-- Result of birthday attack
-
-- Result of Rho attack
-
+- `.c` No dependency based implementation -->
 
 
 # Build
 
-To build the project, you are recommanded to setup a virtual env.
+Python's virtual env is recommanded.
 
 First type the following command in the root directory:
 ```bash
@@ -40,6 +32,8 @@ To exit, just type
 ```
 deactivate
 ```
+
+
 
 
 # Reference

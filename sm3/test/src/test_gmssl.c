@@ -34,7 +34,8 @@ main (int argc, char **argv)
 void
 test_large_file (char *filename)
 {
-  const size_t dgst_len = SM3_DIGST_SZ_IN_BT;
+  // const size_t dgst_len = SM3_DIGST_SZ_IN_BT;
+  const size_t dgst_len = 32;
   uint8_t dgst[dgst_len];
 
   // Start measuring time
@@ -54,7 +55,7 @@ test_large_file (char *filename)
   printf ("Hashing... finished:\n");
 #endif
 
-  sm3_ctx_t ctx;
+  SM3_CTX ctx;
   sm3_init (&ctx);
   int cnt = 0;
   size_t cur_len = 0;
@@ -86,7 +87,8 @@ test_large_file (char *filename)
 void
 test_short_msg ()
 {
-  const size_t dgst_len = SM3_DIGST_SZ_IN_BT;
+  // const size_t dgst_len = SM3_DIGST_SZ_IN_BT;
+  const size_t dgst_len = 32;
   uint8_t dgst[dgst_len];
 
   // test1

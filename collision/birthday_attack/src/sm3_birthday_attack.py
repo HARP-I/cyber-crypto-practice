@@ -1,9 +1,11 @@
 import os
 
-# from gmssl.sm3 import sm3_hash as hash_func
+# from gmssl.sm3 import sm3_hash as sm3_hash_func
 import time
 
-from pysmx.SM3 import digest as hash_func
+from pysmx.SM3 import digest as sm3_hash_func
+
+hash_func = lambda msg: sm3_hash_func(msg)[:4]
 
 
 def search_collisions_birthday_offline(byte_len: int) -> tuple[bytes, bytes, bytes]:
@@ -20,7 +22,7 @@ def search_collisions_birthday_offline(byte_len: int) -> tuple[bytes, bytes, byt
     for i in range(random_size):
         p = os.urandom(byte_len)  # preimage
         d = hash_func(p)  # digest
-        print(d, p)
+        # print(d, p)
 
         lst.append((d, p))
     lst.sort(key=lambda x: x[0])
@@ -48,21 +50,40 @@ def search_collisions_birthday_online(byte_len: int) -> tuple[bytes, bytes, byte
     while True:  # have it search without stop
         cur_p = os.urandom(byte_len)
         cur_d = hash_func(cur_p)
-        print(cur_d, cur_p)
+        # print(cur_d, cur_p)
         old_p = d2p.setdefault(cur_d, cur_p)
         if old_p != cur_p:  # 1. new set 2. old set
             return cur_p, old_p, cur_d
+        # else:
+        #     print(old_p)
 
 
-def search_collisions_rho():
-    pass
+def search_collisions_birthday_iteration(byte_len: int) -> tuple[bytes, bytes, bytes]:
+    """
+    why bother random
+    :param byte_len: length of preimage in byte to search collisions
+    :return: [preimage1, preimage2, common_hash]
+    """
+    # hash_func = digest()
+    # digest to preimage
+    d2p = {}
+    for i in range(1 << (byte_len << 3)):
+        # cur_p = os.urandom(byte_len)
+        cur_p = i.to_bytes(byte_len, byteorder="little")
+        # print(cur_p.hex())
+        cur_d = hash_func(cur_p)
+        # print(cur_d, cur_p)
+        old_p = d2p.setdefault(cur_d, cur_p)
+        if old_p != cur_p:  # 1. new set 2. old set
+            return cur_p, old_p, cur_d
 
 
 def main():
     st = time.time()
     res = search_collisions_birthday_online(16)
     # res = search_collisions_birthday_offline(16)
-    print(time.time() - st)
+    # res = search_collisions_birthday_iteration(16)
+    print(f"{time.time() - st:.3f}s")
     print(res)
 
 

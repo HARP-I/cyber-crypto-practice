@@ -27,6 +27,8 @@ endif()
 #
 add_subdirectory(sm3)
 
-# add_subdirectory(sm3)
+# to do...
+# add_subdirectory(collision)
+
 # add_subdirectory(sm3)
 # add_subdirectory(sm3)

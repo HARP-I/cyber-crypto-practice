@@ -1,4 +1,10 @@
 
+
+# Result
+- Toy demo attack(Reduced sm3 by truncation)
+![](https://s2.loli.net/2022/07/27/VmhCrIfbn7cO43y.png)
+
+
 # Principle
 
 The Rho method is an algorithm for finding collisions that, unlike the

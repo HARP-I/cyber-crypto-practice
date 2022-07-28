@@ -14,7 +14,7 @@
 #include <sys/time.h>
 // #include <stdlib.h>
 
-// #define Progress_Log
+#define Progress_Log
 
 void dump (const uint8_t *arr, size_t len, const char *info, size_t col);
 void test_short_msg (int rounds);
