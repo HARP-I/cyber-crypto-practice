@@ -1,20 +1,13 @@
 
 # Introduction
 网络空间安全创新创业实践课设
+(Cyberspace Security Innovation and entrepreneurship practice project)
 
-
-
-
-Cyberspace Security Innovation and entrepreneurship practice in cyberspace
-
-
-
-# 完成情况
+# Status (完成情况)
 TODO
 Project: implement the naïve birthday attack of reduced SM3
 Project: implement the Rho method of reduced SM3
 Project: implement length extension attack for SM3, SHA256, etc.
-
 Project: do your best to optimize SM3 implementation (software)
 
 Project: Impl Merkle Tree following RFC6962
@@ -65,8 +58,52 @@ Project: The commitment scheme used by MoE is SHA256-based.
 a. commit = SHA256(cn_id, grade, year, sig_by_moe, r)****
 
 
-[SM3](sm3/README.md)
-[SM4](sm4/README.md)
-[Hash Collision](collision/collision.md)
-- [Birthday Attack](collision/collision.md)
-- [Birthday Attack](collision/collision.md)
+- [SM3](sm3/README.md)
+- [SM4](sm4/README.md)
+- [Hash Collision](collision/README.md)
+  - [Birthday Attack](collision/birthday_attack/README.md)
+  - [Rho Attack](collision/rho_attack/README.md)
+
+
+# Build
+
+Generally use CMake(3.5+) to build c/c++ project.
+Choose your build tools use `-G`.
+```bash
+mkdir build
+cd build
+cmake .. -G="MingW Makefiles"
+make
+```
+Or:
+```
+cmake -S . -B build
+cmake --build build
+```
+
+- `build\bin`: Executable test programs 
+- `build\lib`: Static lib
+
+
+`*.py` can directly run in interpreter.
+
+## virtual env
+For python, virtual env is recommanded. 
+Type the following command in terminal. 
+```bash
+python -m venv venv
+```
+Activate the venv
+```bash
+./venv/Script/activate
+```
+To exit:
+```bash
+deactivate
+```
+
+## Python Library
+```bash
+# provide api for sm3
+pip install snowland-smx==0.3.1
+```

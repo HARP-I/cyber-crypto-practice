@@ -18,6 +18,7 @@ It can be generalized to the following cases, in the perspective of attacker.
 Notations:
 - $pad(X) = X || padX $
 - $Hash(X) = Hash(IV, pad(X))$
+
 ### Case1
 - Unknown: $M$ (or partly unknown)
 - Known: $Hash(M), len(M)$
@@ -88,6 +89,25 @@ Need only once hash. We briefly change the `sm3` hash function so that it can ha
 We generate the secret as long as possible and it is still easily forgery by a iteration of guess.
 ![](https://s2.loli.net/2022/07/28/yNWnClerOwGcbB1.png)
 ![](https://s2.loli.net/2022/07/28/IjVZ4cenPWykq5O.png)
+
+### API
+Use modified SM3 API from `snowland-smx`
+```python
+def digest(msg, state=(IV, 0)):
+    # ....
+    cur_v, cur_len = state
+    len1 = len(msg) + cur_len
+    # .... 
+    y = reduce(CF, B, cur_v)
+    # ....
+```
+Make hash can continue on from state of `cur_v` and reord the bytes in cur_len 
+
+
+For detailed:
+- [API](./SM3.py)
+- [Attack with len](./len_ex_attack.py)
+- [Attack with no len](./len_ex_attack_lex_ex_attack_strict.py)
 
 
 
