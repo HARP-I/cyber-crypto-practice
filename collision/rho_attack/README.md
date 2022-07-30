@@ -1,3 +1,8 @@
+# Requirement
+```bash
+# provide api for sm3
+pip install snowland-smx==0.3.1
+```
 
 # Result
 - Toy demo attack(Reduced sm3 by truncation)

@@ -89,6 +89,13 @@ In a words, requires a lot of memory.
 See [Rho method](../rho_attack/README.md]) to learn about a low-memory attack.
 
 
+# Requirement
+```bash
+# provide api for sm3
+pip install snowland-smx==0.3.1
+```
+
+
 # Reference
 <!-- - [Bithday Attack](https://en.wikipedia.org/wiki/Birthday_attack) -->
 - [Birthday Problem](https://en.wikipedia.org/wiki/Birthday_problem)
