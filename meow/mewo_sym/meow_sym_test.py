@@ -1,3 +1,8 @@
+# If not pycharm, you should add root  of project to env
+import sys
+path = "d:\\demo\\crypto-practice\\" # meow's absolute path
+sys.path.append(path)
+
 from meow.include.color import render, render2
 from meow.include.meow import meow_hash
 from meow_symmetry import gen_abc_symmetry_block32, gen_range, meow_symmetry

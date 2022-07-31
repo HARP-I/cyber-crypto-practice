@@ -2,6 +2,7 @@ import struct
 from meow.include.util import aes_sbox, gf_multiply, pxor, psubq
 import os
 
+
 flag_debug = False
 debug_print = print if flag_debug else lambda x: x
 

@@ -1,6 +1,10 @@
+# If not pycharm, you should add root  of project to env 
+import sys
+path = "d:\\demo\\crypto-practice\\" # meow's absolute path
+sys.path.append(path)
+
 from meow_inverse import meow_inverse
 from meow.include.meow import meow_hash
-
 
 def key_print(key: bytes):
     print(f'Key: {key.hex()[:64]}')
