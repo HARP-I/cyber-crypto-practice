@@ -1,16 +1,37 @@
-
-## Iteraition Attack
-Reduced sm3 by cut(Truncate few bits)
-> Fail to search collisions in full sm3.
+## Birthday Attack
+> Attack reduced sm3 by cut (Truncate few bits)
+> Fail to search collisions in full sm3 (256 bit digest)
 > Not attempted to do search collisions in round-reduced sm3.
-- Birthday Attack(online)
+
+### c++
+- 32 bit (psudo-random)
+  ![](https://s2.loli.net/2022/07/31/A2ZDqeX5R9s7fWh.png)
+- 40 bit (psudo-random)
+  ![](https://s2.loli.net/2022/07/31/rg4exKpDsjiuIaW.png)
+- 40 bit (device-random)
+ ![](https://s2.loli.net/2022/07/31/vfSk6mytVWdL9Hn.png)
+ ![](https://s2.loli.net/2022/07/31/t4vrjOhZRz2YQ9E.png)
+- 48 bit (psudo-random)
+ None... Failure due to 'Periodicity' of psudo-random 
+- 48 bit (device-random)
+  ![](https://s2.loli.net/2022/07/31/aMfyOqtLdrSE7AH.png)
+  ![](https://s2.loli.net/2022/07/31/vBin281lgtrIkZ7.png)
+
+
+### python
+- Online python(16 bit)
 ![](https://s2.loli.net/2022/07/27/leY2QFwWzViADbT.png)
-- Bithday Attack(Iteration)
+- Iteration python(16 bit)
 ![](https://s2.loli.net/2022/07/27/62tQu7cKosENZiL.png)
+
+
+## Build and run 
+```
+g++ sm3_birthday_attack.cc sm3.c -o sm3_birthday_attack -mssse3
+./sm3_birthday_attack
 ```
 
-
-## Principle of Birthday Attack
+## Principle
 - [Birthday problem](https://en.wikipedia.org/wiki/Birthday_problem)
 - [Pigeonhole principle](https://en.wikipedia.org/wiki/Pigeonhole_principle)
 
@@ -87,13 +108,6 @@ More ambiguous idea: Offline `RNG`, Offline `Hash`.  Maybe it can be interpreted
 # Defects
 In a words, requires a lot of memory.
 See [Rho method](../rho_attack/README.md]) to learn about a low-memory attack.
-
-
-# Requirement
-```bash
-# provide api for sm3
-pip install snowland-smx==0.3.1
-```
 
 
 # Reference
