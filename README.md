@@ -38,7 +38,7 @@ To exit:
 ```bash
 deactivate
 ```
-
+ 
 ## Python Library
 ```bash
 # provide api for sm3
@@ -62,6 +62,3 @@ cmake --build build
 
 - `build\bin`: Executable test programs 
 - `build\lib`: Static lib
-
-
-`*.py` can directly run in interpreter.
