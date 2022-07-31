@@ -2,6 +2,21 @@
 
 SM3 is a cryptographic hash algorithm published by OSCCA as an authorized cryptographic hash algorithm for the use within China. It is intended to address multiple use cases for commercial cryptography, including, but not limited to: Digital signatures, MAC, RNG.
 
+# Overview of performance
+
+**Hash  about 1GiB random data**
+
+| Version    | Time measure |
+| ---------- | ------------ |
+| sm3_origin | 20s+         |
+| sm3_opt    | 4.56s        |
+| openssl    | 3.97s        |
+| gmssl      | 11.04s       |
+
+
+
+
+
 # Implementation
 
 - `./sm3_base`: Trival Implementation
@@ -15,11 +30,10 @@ SM3 is a cryptographic hash algorithm published by OSCCA as an authorized crypto
   - SIMD
 - `./sm3_reduced`: round-reduced sm3 (add round options in api)
 
-## Time
-
 # Build
-Change to root directory and use your build tools.
+`cd` to root directory and use your build tools.
 For my environment(win10, mingw):
+
 ```bash
 mkdir build
 cd build
@@ -29,6 +43,8 @@ make
 Then there will be some subdirectories
 - `.\bin`: Executable test programs of sm3 
 - `.\lib`: Static lib of different versions of sm3
+
+If your machine don't support `ssse3`, you probably need to uncomment SIMD entry in `CMakeLists.txt`
 
 # Test
 > Use openssl/gmssl as benchmark (such as `echo -n "abc" | gmssl sm3`)
@@ -84,14 +100,35 @@ Message Expansion + Compress
 - Compress Func
 <img src="https://s2.loli.net/2022/07/19/hnyDX4jm6PsL7qS.png" width="75%">
 
-## Optimized
+## Optimization
 
 - Look-up table
-Replace rotate shift left operation with table look up  
-
-SIMD can optimize sm3
-
-
+  Precomputation: replace rotate shift left operation with table look-up operation. 
+  ```(Txx <<< j) -> K[j]```
+  ![](https://s2.loli.net/2022/07/31/xGfZTPIeQg9hwtz.png)
+  - Similarly, most function is replaced with macro to eliminate stack operation.
+- Loop unrolling (xmacro from gmssl)
+  - `for` was unrolled by calling macro. 
+  - Reduce branching and operation not related to calculate hash.
+  - Make a little modification on one round, only update but not shift the whole block.
+  - ![](https://s2.loli.net/2022/07/31/zkTUEm3bO8vHjpq.png)
+  - Then shift a block each round; eight round = one cycle.
+- SIMD
+  - SIMD is used to parallelly generate W.
+  - For W0 ~ W15:
+  ```c
+            X = _mm_shuffle_epi8 (
+              _mm_loadu_si128 ((__m128i *)(input + (j << 2))), //
+              _mm_setr_epi8 (3, 2, 1, 0, 7, 6, 5, 4, 11, 10, 9, 8, 15, 14, 13,
+                             1)  //
+  ```
+  Absorb four words(32 bytes blocks) each time. For each word, to read bytes in `big endian` and store it in a `uint32_t`. Use `shuffle` to reversed order of each four bytes.
+  - For W16 ~ W67:
+    - It's **impossible** to calcualte a vector of `X = (W[j - 3], W[j - 2], W[j - 1], W[j]) `. Because the `W[j]` is up to W[j - 3] -- they are not independent in dataflow.
+    - But we can divide the vector into two part:
+      - `X = Xa + Xb = (W[j - 3], W[j - 2], W[j - 1], 0) '+' (0 , 0, 0, W[j])`
+      - Each time we jump four step, but each loop become consumed double time than before. As a result, the time measure in this part should be half.
+    - For detailed description, look through the code comment. Actually simd trick like 'broadcast' and math trick like 'differential sequence' are combined. 
 
 <!-- ![](https://media.giphy.com/media/oZ911NGZED3iQqmYcn/giphy.gif) -->
 
@@ -107,9 +144,7 @@ SIMD can optimize sm3
 
 
 ## An Interesting Idea 
-Actully if permitted, you can do:
-```bash
-./sm3_test_simd ./sm3_test_simd
-```
-It makes the program hash itself...
+To makes the program hash itself
 
+```
+./sm3_test_simd ./sm3_test_simd```
