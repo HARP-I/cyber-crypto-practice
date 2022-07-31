@@ -1,9 +1,8 @@
 from hashlib import sha256
 from typing import Callable
+import bisect
 # from functools import cache
 # from functools import reduce
-import sys
-import bisect
 
 
 # choose hash algorithm
